@@ -1,77 +1,32 @@
 import streamlit as st
-from datetime import datetime
 
 
-def sidebar(df):
-    with st.sidebar:
+def sidebar():
 
-        st.markdown("## 🏥 ALL IS WELL")
-        st.markdown("### Hospital Analytics")
+    st.sidebar.title("🏥 All Is Well Hospital")
 
-        st.divider()
+    page = st.sidebar.radio(
 
-        st.markdown("### 📅 Date")
-        st.info(datetime.now().strftime("%d %B %Y"))
+        "Navigation",
 
-        st.markdown("### ⏰ Time")
-        st.info(datetime.now().strftime("%I:%M:%S %p"))
+        [
 
-        st.divider()
+            "🏥 Dashboard",
 
-        # -----------------------------
-        # Search
-        # -----------------------------
+            "👥 Patients",
 
-        search = st.text_input(
-            "🔍 Search Patient",
-            placeholder="Enter patient name..."
-        )
+            "💊 Medical Store",
 
-        # -----------------------------
-        # Gender Filter
-        # -----------------------------
+            "💰 Revenue",
 
-        gender = st.selectbox(
-            "👤 Gender",
-            ["All"] + sorted(df["Gender"].dropna().unique().tolist())
-        )
+            "📊 Analytics",
 
-        # -----------------------------
-        # Disease Filter
-        # -----------------------------
+            "⚙ Settings",
 
-        disease = st.selectbox(
-            "🦠 Disease",
-            ["All"] + sorted(df["Disease"].dropna().unique().tolist())
-        )
+            "ℹ About"
 
-        # -----------------------------
-        # Doctor Filter
-        # -----------------------------
+        ]
 
-        doctor = st.selectbox(
-            "👨‍⚕️ Doctor",
-            ["All"] + sorted(df["Doctor"].dropna().unique().tolist())
-        )
+    )
 
-        # -----------------------------
-        # Department Filter
-        # -----------------------------
-
-        department = st.selectbox(
-            "🏥 Department",
-            ["All"] + sorted(df["Department"].dropna().unique().tolist())
-        )
-
-        st.divider()
-
-        refresh = st.button("🔄 Refresh Dashboard")
-
-        return {
-            "search": search,
-            "gender": gender,
-            "disease": disease,
-            "doctor": doctor,
-            "department": department,
-            "refresh": refresh
-        }
+    return page
