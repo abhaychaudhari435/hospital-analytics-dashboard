@@ -1,22 +1,21 @@
 import streamlit as st
-from dashboard.settings_page import settings_page
-from dashboard.about_page import about_page
 
-# -----------------------
+# ----------------------------
 # Import Pages
-# -----------------------
-
+# ----------------------------
 from dashboard.sidebar import sidebar
+
 from dashboard.dashboard_page import dashboard_page
 from dashboard.patients_page import patients_page
 from dashboard.medical_page import medical_page
 from dashboard.revenue_page import revenue_page
 from dashboard.analytics_page import analytics_page
+from dashboard.settings_page import settings_page
+from dashboard.about_page import about_page
 
-# -----------------------
-# Page Config
-# -----------------------
-
+# ----------------------------
+# Page Configuration
+# ----------------------------
 st.set_page_config(
     page_title="All Is Well Hospital Analytics",
     page_icon="🏥",
@@ -24,16 +23,14 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# -----------------------
-# Sidebar Navigation
-# -----------------------
-
+# ----------------------------
+# Sidebar
+# ----------------------------
 page = sidebar()
 
-# -----------------------
-# Open Pages
-# -----------------------
-
+# ----------------------------
+# Navigation
+# ----------------------------
 if page == "🏥 Dashboard":
     dashboard_page()
 
@@ -49,10 +46,11 @@ elif page == "💰 Revenue":
 elif page == "📊 Analytics":
     analytics_page()
 
-elif page == "⚙ Settings":
+elif page == "⚙️ Settings":
     settings_page()
 
-elif page == "ℹ About":
+elif page == "ℹ️ About":
     about_page()
-    st.write("All Is Well Hospital Analytics Dashboard")
-    st.write("Version 2.0")
+
+else:
+    st.error("Page not found.")
