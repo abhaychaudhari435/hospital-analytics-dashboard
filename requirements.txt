@@ -1,7 +1,7 @@
-streamlit==1.50.0
-pandas==2.3.3
-plotly==6.8.0
-numpy==2.0.2
-openpyxl==3.1.5
-requests==2.32.5
-GitPython==3.1.50
+streamlit
+pandas
+plotly
+numpy
+openpyxl
+requests
+GitPython
