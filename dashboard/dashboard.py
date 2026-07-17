@@ -1,33 +1,40 @@
 import streamlit as st
 
 def show_cards(df):
+
     total_patients = len(df)
 
-    male_patients = len(df[df["Gender"].astype(str).str.lower() == "male"])
-    female_patients = len(df[df["Gender"].astype(str).str.lower() == "female"])
+    male_patients = len(df[df["Gender"].astype(str).str.lower()=="male"])
+    female_patients = len(df[df["Gender"].astype(str).str.lower()=="female"])
 
     total_doctors = df["Doctor"].nunique()
     total_departments = df["Department"].nunique()
     total_diseases = df["Disease"].nunique()
 
-    col1, col2, col3 = st.columns(3)
+    admitted = len(df[df["Status"].astype(str).str.lower()=="admitted"])
+    discharged = len(df[df["Status"].astype(str).str.lower()=="discharged"])
+    critical = len(df[df["Status"].astype(str).str.lower()=="critical"])
 
-    with col1:
-        st.metric("👥 Total Patients", total_patients)
+    rooms = df["Room No"].nunique()
+    wards = df["Ward"].nunique()
 
-    with col2:
-        st.metric("👨 Male Patients", male_patients)
+    c1,c2,c3,c4,c5 = st.columns(5)
 
-    with col3:
-        st.metric("👩 Female Patients", female_patients)
+    c1.metric("👥 Patients", total_patients)
+    c2.metric("👨 Male", male_patients)
+    c3.metric("👩 Female", female_patients)
+    c4.metric("👨‍⚕️ Doctors", total_doctors)
+    c5.metric("🏥 Departments", total_departments)
 
-    col4, col5, col6 = st.columns(3)
+    st.divider()
 
-    with col4:
-        st.metric("👨‍⚕️ Doctors", total_doctors)
+    c6,c7,c8,c9,c10 = st.columns(5)
 
-    with col5:
-        st.metric("🏥 Departments", total_departments)
+    c6.metric("🦠 Diseases", total_diseases)
+    c7.metric("🛏️ Rooms", rooms)
+    c8.metric("🏨 Wards", wards)
+    c9.metric("✅ Admitted", admitted)
+    c10.metric("🏠 Discharged", discharged)
 
-    with col6:
-        st.metric("🦠 Diseases", total_diseases)
+    if critical > 0:
+        st.error(f"🚨 Critical Patients : {critical}")
